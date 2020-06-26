@@ -1,4 +1,4 @@
-This is a write up for the tux-fanpage challenge for the 2020 redpwnCTF competition. This challenge is one that I found interesting and honestly spent way too much time on.
+This is a write up for the tux-fanpage challenge for the 2020 redpwnCTF competition. This challenge is one that I found very interesting as I love challenges that use URL parameter tampering. And honestly, I spent way too much time on it before figuring it out LOL.
 
 # Challenge intro
 
@@ -11,7 +11,7 @@ Site: tux-fanpage.2020.redpwnc.tf
 The challenge also provides the source file for index.js.
 
 
-One of the first things I noticed in the code was the path traversal prevention. The code finds any `../` strings in the path string and replaces them with an empty string, effectively removing direct path traversal attempts (even with URL encoding applied).
+After downloading the code and reviewing, one of the first things I noticed in it was the path traversal prevention. The code finds any `../` strings in the path string and replaces them with an empty string, effectively removing direct path traversal attempts (even with URL encoding applied).
 
 ```
 //Prevent directory traversal attack
@@ -49,3 +49,5 @@ function strip(dir){
     return dir
 }
 ```
+
+After exhausting all possible encoding inputs for path traversal, I remembered that I didn't only have to submit the path parameter as a string. If the application was expecting a string but did not do any type validation, it would be possible to change the logic of the code by passing it a type that it wasn't designed to work with such as an object or an array!
