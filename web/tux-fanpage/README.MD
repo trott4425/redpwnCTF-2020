@@ -60,11 +60,11 @@ function strip(dir){
 }
 ```
 
-After some quick inspection of the index.html page, I noticed there was a assets folder, so i figured ultimately, my payload would need to look something like `assets/../../index.js`
+After some quick inspection of the index.html page, I noticed there was an assets folder, so I figured ultimately, my payload would need to look something like `assets/../../index.js`
 
 After many failed attempts and exhausting all possible encoding inputs for path traversal, I remembered that I didn't only have to submit the path parameter as a string. If the application was expecting a string but did not do any type validation, it would be possible to change the logic of the code by passing it a type that it wasn't designed to work with, such as an object or an array!
 
-Passing something like the following to the path parameter, `https://tux-fanpage.2020.redpwnc.tf/page?path[]=a&path[]=b`, we can convert it to an array. Because of the loosely typed nature of javascript, if the object that we pass has some of the same functions and properties that the `string` type has, we may be able to have it skirt the security checks and get path traversal.
+Passing something like the following to the path parameter, `https://tux-fanpage.2020.redpwnc.tf/page?path[]=a&path[]=b`, we can convert it to an array. Because of the loosely typed nature of javascript, if the object that we pass has some of the same methods and properties that the `string` type has, we may be able to have it skirt the security checks and get path traversal. Luckily, the methods that are called against the path string, the array object also has! Specifically, `.includes('../')` and concating the array with a string.
 
 One important thing to remember with an array, is that when an array is converted to a string, either by calling `.toString()` or by concatenating it with another string, like how the path parameter is in the below code,
 ```javascript
