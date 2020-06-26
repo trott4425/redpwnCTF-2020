@@ -41,7 +41,7 @@ function preventTraversal(dir){
 ```
 If I was going to be able to read the local index.js file, I was going to need a way to bypass the path traversal preventions that they've put in place. While hard, it didn't seem impossible.
 
-Hold on, thats not all though. There was also code that removed any leading characters that were not alphanumeric. This means that whatever payload I come up with will need to start with an alphanumeric number.
+Hold on, thats not all though. There is also code that removed any leading characters that were not alphanumeric. This means that whatever payload I come up with will need to start with an alphanumeric number.
 
 ```javascript
 //Strip leading characters
