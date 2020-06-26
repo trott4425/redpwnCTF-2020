@@ -10,7 +10,7 @@ Site: tux-fanpage.2020.redpwnc.tf
 
 The challenge also provides the source file for index.js.
 
-
+# Discovery
 After downloading the source code and reviewing, the application looks like a simple ExpressJS web server that returns a file via a path query parameter `/page?path=index.html`.
 
 One of the first things I noticed was a line in the source code displaying a `flag` variable: 
@@ -90,7 +90,9 @@ it will concatenate all of the members of the array into a string but will also 
 
 This is important to note because when the `path` url query parameter is concatenated with the `./public/` string, the commas can affect whether the correct path is resolved or not.
 
+# Solution
 Putting this all together, we can construct the below URL to successfully gain path traversal and grab our flag!
 
 `https://tux-fanpage.2020.redpwnc.tf/page?path[]=a&path[]=/../../index.js`
 
+![flag](./flag.png)
